@@ -1,0 +1,41 @@
+## <summary>policy for znc</summary>
+
+########################################
+## <summary>
+##	Execute znc_exec_t in the znc domain.
+## </summary>
+## <param name="domain">
+## <summary>
+##	Domain allowed to transition.
+## </summary>
+## </param>
+#
+interface(`znc_domtrans',`
+	gen_require(`
+		type znc_t, znc_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	domtrans_pattern($1, znc_exec_t, znc_t)
+')
+
+######################################
+## <summary>
+##	Execute znc in the caller domain.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`znc_exec',`
+	gen_require(`
+		type znc_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	can_exec($1, znc_exec_t)
+')
+
+

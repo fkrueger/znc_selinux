@@ -1,0 +1,128 @@
+.TH  "znc_selinux"  "8"  "21-02-02" "znc" "SELinux Policy znc"
+.SH "NAME"
+znc_selinux \- Security Enhanced Linux Policy for the znc processes
+.SH "DESCRIPTION"
+
+Security-Enhanced Linux secures the znc processes via flexible mandatory access control.
+
+The znc processes execute with the znc_t SELinux type. You can check if you have these processes running by executing the \fBps\fP command with the \fB\-Z\fP qualifier.
+
+For example:
+
+.B ps -eZ | grep znc_t
+
+
+.SH "TODO"
+
+Make sure DCC transfers work through znc (if it even works this way).
+
+Create better documentation (add managed files <-> context overview automatically).
+
+.SH "ENTRYPOINTS"
+
+The znc_t SELinux type can be entered via the \fBznc_exec_t\fP file type.
+
+The default entrypoint paths for the znc_t domain are the following:
+
+/usr/bin/znc
+
+Data is found here by default:
+/var/lib/znc/.znc/
+
+SELinux policy supports also this place (maybe):
+/home/*/.znc/
+
+.SH PROCESS TYPES
+SELinux defines process types (domains) for each process running on the system
+.PP
+You can see the context of a process using the \fB\-Z\fP option to \fBps\bP
+.PP
+Policy governs the access confined processes have to files.
+SELinux znc policy is very flexible allowing users to setup their znc processes in as secure a method as possible.
+.PP
+The following process types are defined for znc:
+
+.EX
+.B znc_t
+.EE
+.PP
+Note:
+.B semanage permissive -a znc_t
+can be used to make the process type znc_t permissive. SELinux does not deny access to permissive process types, but the AVC (SELinux denials) messages are still generated.
+
+.SH BOOLEANS
+SELinux policy is customizable based on least access required.  znc policy is extremely flexible and has several booleans that allow you to manipulate the policy and run znc with the tightest access possible.
+
+
+.PP
+No booleans have been defined as of yet.
+
+.EE
+
+.SH "MANAGED FILES"
+
+The SELinux process type znc_t can manage files labeled with the following file types.  The paths listed are the default paths for these file types.  Note the processes UID still need to have DAC permissions.
+
+.br
+.B znc_*_t
+
+  TODO add those later, in the meantime look in the source code in znc.fc OR use ls -alR /var/lib/znc/.znc/
+
+	/some/path
+.br
+
+.SH FILE CONTEXTS
+SELinux requires files to have an extended attribute to define the file type.
+.PP
+You can see the context of a file using the \fB\-Z\fP option to \fBls\bP
+.PP
+Policy governs the access confined processes have to these files.
+SELinux znc policy is very flexible allowing users to setup their znc processes in as secure a method as possible.
+.PP
+
+.I The following file types are defined for znc:
+
+
+.EX
+.PP
+.B znc_exec_t
+.EE
+
+- Set files with the znc_exec_t type, if you want to transition an executable to the znc_t domain.
+
+.br
+.TP 5
+Paths:
+/var/lib/znc/.znc/
+/home/*/.znc/
+
+.PP
+Note: File context can be temporarily modified with the chcon command.  If you want to permanently change the file context you need to use the
+.B semanage fcontext
+command.  This will modify the SELinux labeling database.  You will need to use
+.B restorecon
+to apply the labels.
+
+.SH "COMMANDS"
+.B semanage fcontext
+can also be used to manipulate default file context mappings.
+.PP
+.B semanage permissive
+can also be used to manipulate whether or not a process type is permissive.
+.PP
+.B semanage module
+can also be used to enable/disable/install/remove policy modules.
+
+.B semanage boolean
+can also be used to manipulate the booleans
+
+.PP
+.B system-config-selinux
+is a GUI tool available to customize SELinux policy settings.
+
+.SH AUTHOR
+This manual page was auto-generated using
+.B "sepolicy manpage".
+
+.SH "SEE ALSO"
+selinux(8), semanage(8), restorecon(8), chcon(1), sepolicy(8), setsebool(8)

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+ <short>znc</short>
+ <description>znc on 6666/tcp &amp; 6667/tcp</description>
+ <port protocol="tcp" port="6666" />
+ <port protocol="tcp" port="6667" />
+</service>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+ <short>oidentd</short>
+ <description>oidentd / ident port</description>
+ <port protocol="tcp" port="113" />
+</service>
