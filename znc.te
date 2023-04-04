@@ -1,4 +1,4 @@
-policy_module(znc, 20211025.1.2)
+policy_module(znc, 20211025.1.3)
 
 # vim: softtabstop=2 tabstop=2 shiftwidth=2 expandtab
 
@@ -57,7 +57,7 @@ domtrans_pattern(unconfined_service_t, znc_exec_t, znc_t)
 corenet_port(znc_port_t)
 
 
-permissive znc_t;
+#permissive znc_t;
 
 
 
@@ -110,6 +110,10 @@ manage_files_pattern(znc_t, znc_log_t, znc_log_t)
 list_dirs_pattern(znc_t, znc_cfg_t, znc_cfg_t)
 read_files_pattern(znc_t, znc_cfg_t, znc_cfg_t)
 manage_files_pattern(znc_t, znc_cfg_t, znc_cfg_t)
+
+list_dirs_pattern(znc_t, znc_cfg_ssl_t, znc_cfg_ssl_t)
+getattr_files_pattern(znc_t, znc_cfg_ssl_t, znc_cfg_ssl_t)
+read_files_pattern(znc_t, znc_cfg_ssl_t, znc_cfg_ssl_t)
 
 search_dirs_pattern(znc_t, znc_home_dir_t, znc_home_dir_t)
 list_dirs_pattern(znc_t, znc_moddata_mods_t, znc_moddata_mods_t)

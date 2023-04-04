@@ -9,7 +9,7 @@
 
 Name:   znc_selinux
 Version:	1.0
-Release:	1%{?dist}
+Release:	5%{?dist}
 Summary:	SELinux policy module for znc
 BuildRequires: policycoreutils, selinux-policy-devel
 
@@ -97,6 +97,9 @@ exit 0
 
 
 %changelog
+* Tue Apr 4 2023 Frederic Krueger <fkrueger-dev-selinux_znc@holics.at> 1.0-5
+- znc_cfg_ssl_t was missing read permissions
+
 * Wed Oct 27 2021 Frederic Krueger <fkrueger-dev-selinux_znc@holics.at> 1.0-1
 - Initial version
 
