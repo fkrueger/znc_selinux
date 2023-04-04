@@ -1,4 +1,4 @@
-policy_module(znc, 20211025.1.3)
+policy_module(znc, 20211025.1.4)
 
 # vim: softtabstop=2 tabstop=2 shiftwidth=2 expandtab
 
@@ -76,9 +76,9 @@ fs_read_nfs_symlinks(znc_t)
 fs_search_nfs(znc_t)
 
 ## network stuff
-allow znc_t self:netlink_route_socket { bind create getattr nlmsg_read };
-allow znc_t self:tcp_socket { accept bind connect create getattr listen setopt };
-allow znc_t self:udp_socket { accept connect create getattr setopt };
+allow znc_t self:netlink_route_socket { bind create getattr nlmsg_read read write };
+allow znc_t self:tcp_socket { accept bind connect create getattr listen read setopt write };
+allow znc_t self:udp_socket { accept connect create getattr read setopt write };
 
 allow znc_t znc_port_t:tcp_socket name_bind;
 corenet_tcp_bind_generic_node(znc_t)
