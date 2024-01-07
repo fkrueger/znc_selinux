@@ -1,4 +1,4 @@
-policy_module(znc, 20211025.1.4)
+policy_module(znc, 20211025.1.5)
 
 # vim: softtabstop=2 tabstop=2 shiftwidth=2 expandtab
 
@@ -38,6 +38,7 @@ type znc_users_user_dir_t;
 
 define(`znc_all_types',`{ znc_home_dir_t znc_dir_t znc_cfg_ssl_t znc_cfg_t znc_lib_t znc_moddata_dir_t znc_log_t znc_moddata_mods_t znc_mods_dir_t znc_mods_mod_t znc_networks_t znc_networks_dir_t znc_port_t znc_users_dir_t znc_users_user_dir_t }')
 define(`znc_relabeler_types',`{ setfiles_t system_cronjob_t unconfined_t unconfined_service_t }')
+
 
 ## debug script:
 # echo "XX0"; audit2allow -Ri /var/log/audit/audit.log   > /root/x; vi /root/x
@@ -177,9 +178,17 @@ manage_dirs_pattern(unconfined_t, znc_all_types, znc_all_types)
 getattr_files_pattern(unconfined_t, znc_all_types, znc_all_types)
 manage_files_pattern(unconfined_t, znc_all_types, znc_all_types)
 
+### unconfined_service_t full access:
+list_dirs_pattern(unconfined_service_t, znc_all_types, znc_all_types)
+manage_dirs_pattern(unconfined_service_t, znc_all_types, znc_all_types)
+getattr_files_pattern(unconfined_service_t, znc_all_types, znc_all_types)
+manage_files_pattern(unconfined_service_t, znc_all_types, znc_all_types)
 
 
 ## selinux-relabelers-support:
+search_dirs_pattern(znc_relabeler_types, znc_all_types, znc_all_types)
+list_dirs_pattern(znc_relabeler_types, znc_all_types, znc_all_types)
+
 # relabelfrom:
 relabelfrom_dirs_pattern(znc_relabeler_types, znc_all_types, znc_all_types)
 relabelfrom_files_pattern(znc_relabeler_types, znc_all_types, znc_all_types)

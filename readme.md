@@ -8,12 +8,12 @@ A complete version of the resulting RPM file can be found in my technoholics-rep
 It can be found here: https://dev.techno.holics.at/technoholics-repo/
 
 ## Easy installation with technoholics-repo
-* Download technoholics-repo-release-20210620-1.el8.noarch.rpm
+* Download technoholics-repo-release-20231002-2.el8.noarch.rpm
 * Install access to the techno.holics.at repository via
-yum install https://dev.techno.holics.at/technoholics-repo/el8/technoholics-repo-release-20210620-1.el8.noarch.rpm
+yum install https://dev.techno.holics.at/technoholics-repo/el8/technoholics-repo-release-20231002-2.el8.noarch.rpm
 * If needed, the gpg key used for signing the RPM packages can be found here: https://dev.techno.holics.at/holics-repo/RPM-GPG-KEY-holicsrepo
-* Now install the inadyn_selinux and preferrably also the inadyn-utils packages.
-yum install inadyn_selinux inadyn
+* Now install the znc_selinux and preferrably also our znc RPM:
+yum install znc_selinux znc
 
 # Cheers!
 

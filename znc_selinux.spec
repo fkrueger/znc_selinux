@@ -9,7 +9,7 @@
 
 Name:   znc_selinux
 Version:	1.0
-Release:	5%{?dist}
+Release:	6%{?dist}
 Summary:	SELinux policy module for znc
 BuildRequires: policycoreutils, selinux-policy-devel
 
@@ -97,6 +97,9 @@ exit 0
 
 
 %changelog
+* Sun Jan 7 2024 Frederic Krueger <fkrueger-dev-selinux_znc@holics.at> 1.0-6
+- znc_home_dir_t access wasn't allowed for unconfined_service_t
+
 * Tue Apr 4 2023 Frederic Krueger <fkrueger-dev-selinux_znc@holics.at> 1.0-5
 - znc_cfg_ssl_t was missing read permissions
 
